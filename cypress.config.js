@@ -1,4 +1,10 @@
 const { defineConfig } = require("cypress");
+const dotenv = require('dotenv')
+const path = require('path')
+
+dotenv.config({
+    path: path.resolve(__dirname, './.env.dev')
+})
 
 module.exports = defineConfig({
   video: true,
@@ -18,6 +24,10 @@ module.exports = defineConfig({
   },
   chromeWebSecurity: false,
   e2e: {
+    env: {
+        username: process.env.USER,
+        password: process.env.PASSWORD
+    },
     baseUrl: 'https://www.saucedemo.com/',
     setupNodeEvents(on, config) {
       // implement node event listeners here
